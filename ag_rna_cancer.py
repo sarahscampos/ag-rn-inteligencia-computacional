@@ -614,7 +614,7 @@ def print_summary(all_best_chr, all_best_fit, feature_names, out_dir="."):
 
     # Salvar relatório em txt
     report_path = os.path.join(out_dir, "relatorio_resultados.txt")
-    with open(report_path, "w") as f:
+    with open(report_path, "w", encoding="utf-8") as f:
         f.write("RELATÓRIO - AG + RNA\n")
         f.write("=" * 50 + "\n\n")
         f.write(f"Melhor experimento  : {best_idx + 1}\n")
