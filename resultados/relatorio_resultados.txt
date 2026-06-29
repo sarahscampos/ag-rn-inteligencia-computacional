@@ -1,0 +1,63 @@
+RELATÓRIO - AG + RNA
+==================================================
+
+Melhor experimento  : 2
+Melhor fitness      : 0.9640
+Média fitness       : 0.9613 ± 0.0029
+Atributos totais    : 75
+Atributos selecion. : 27
+Redução             : 64.0%
+
+Cromossomo:
+[1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0]
+
+Atributos selecionados:
+  [0] arquivo_UF
+  [3] CODMUNNATU
+  [5] RACACOR
+  [7] ESC
+  [10] OCUP
+  [12] CODESTAB
+  [17] TPMORTEOCO
+  [18] OBITOGRAV
+  [22] CIRURGIA
+  [23] NECROPSIA
+  [26] COMUNSVOIM
+  [31] DTCADASTRO
+  [32] ATESTANTE
+  [34] CODIFICADO
+  [35] VERSAOSIST
+  [36] VERSAOSCB
+  [37] FONTEINV
+  [42] NUDIASOBCO
+  [45] FONTES
+  [46] TPRESGINFO
+  [48] CONTADOR
+  [52] res_CAPITAL
+  [53] res_MSAUDCOD
+  [65] ocor_codigo_adotado
+  [66] ocor_CODIGO_UF
+  [71] causabas_subcategoria
+  [72] ano_obito
+
+
+Parâmetros utilizados:
+  pop_size: 30
+  pc: 0.85
+  elitism: 10
+  gap: 2
+  max_gen: 5
+  no_improve: 20
+  n_experiments: 3
+  hidden1: 32
+  hidden2: 16
+  lr: 0.001
+  epochs: 10
+  batch_size: 32
+  patience: 10
+  train_ratio: 0.7
+  val_ratio: 0.15
+  test_ratio: 0.15
+  random_seed: 42
+  w_f1: 0.9
+  w_feat: 0.1

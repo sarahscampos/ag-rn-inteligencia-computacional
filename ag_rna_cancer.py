@@ -13,6 +13,7 @@ import copy
 import os
 import time
 import warnings
+from datetime import datetime
 
 import torch
 import torch.nn as nn
@@ -698,7 +699,8 @@ def main():
         print("  Uso: python ag_rna_cancer.py <caminho_do_csv>")
         return
 
-    out_dir = "resultados"
+    timestamp = datetime.now().strftime("%d-%m-%Y-%H%M%S")
+    out_dir = os.path.join("resultados", timestamp)
     os.makedirs(out_dir, exist_ok=True)
 
     t0 = time.time()
