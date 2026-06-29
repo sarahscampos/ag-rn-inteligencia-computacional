@@ -93,6 +93,48 @@ def preprocess(filepath: str):
     y_raw = df[target_col]
     X_df = df.drop(columns=[target_col])
 
+    # --------------------------------------------------
+    # Conversão de colunas categóricas binárias S/N → 0/1
+    # --------------------------------------------------
+    #
+    binary_sn_cols = [
+        "TPPOS",
+        "STCODIFICA",
+        "CODIFICADO",
+        "res_AMAZONIA",
+        "res_FRONTEIRA",
+        "res_CAPITAL",
+        "ocor_AMAZONIA",
+        "ocor_FRONTEIRA",
+        "ocor_CAPITAL",
+    ]
+    for col in binary_sn_cols:
+        X_df[col] = X_df[col].str.strip().str.upper().map({"S": 1, "N": 0})
+
+    # --------------------------------------------------
+    # Conversão de colunas categóricas nominais → Label Encoding
+    # --------------------------------------------------
+
+    label_enc_cols = [
+        "arquivo_UF",
+        "CAUSABAS",
+        "CB_PRE",
+        "CAUSABAS_O",
+        "causabas_categoria",
+        "causabas_subcategoria",
+        "VERSAOSIST",
+        "FONTES",
+        "TPNIVELINV",
+        "res_MUNNOMEX",
+        "ocor_MUNNOMEX",
+        "ocor_REGIAO",
+        "res_REGIAO",
+    ]
+    le = LabelEncoder()
+    for col in label_enc_cols:
+        X_df[col] = X_df[col].astype(str)
+        X_df[col] = le.fit_transform(X_df[col])
+
     # ── Se os números usarem vírgula decimal (formato BR), normaliza para ponto ──
     X_df = X_df.replace(",", ".", regex=True)
 
@@ -217,12 +259,9 @@ def train_eval_nn(X_tr, y_tr, X_val, y_val, X_te, y_te, n_classes, device):
     no_imp = 0
 
     for epoch in range(PARAMS["epochs"]):
-
         if epoch == 0:
             print(
-                f"      Treinando RNA "
-                f"({n_inputs} atributos, "
-                f"{PARAMS['epochs']} épocas)"
+                f"      Treinando RNA ({n_inputs} atributos, {PARAMS['epochs']} épocas)"
             )
 
         model.train()
@@ -248,7 +287,7 @@ def train_eval_nn(X_tr, y_tr, X_val, y_val, X_te, y_te, n_classes, device):
 
         if epoch % 5 == 0:
             print(
-                f"         Época {epoch+1:2d}/"
+                f"         Época {epoch + 1:2d}/"
                 f"{PARAMS['epochs']} "
                 f"| val_loss={val_loss:.5f}"
             )
@@ -370,9 +409,12 @@ def run_ga(
 
         fit = fitness_fn(
             population[i],
-            X_tr, y_tr,
-            X_val, y_val,
-            X_te, y_te,
+            X_tr,
+            y_tr,
+            X_val,
+            y_val,
+            X_te,
+            y_te,
             n_classes,
             device,
         )
@@ -380,10 +422,10 @@ def run_ga(
         fitness.append(fit)
 
         print(
-            f"  Cromossomo {i+1:3d}/{pop_size} "
+            f"  Cromossomo {i + 1:3d}/{pop_size} "
             f"| atributos={population[i].sum():2d} "
             f"| fitness={fit:.4f} "
-            f"| tempo={time.time()-t_chr:.1f}s"
+            f"| tempo={time.time() - t_chr:.1f}s"
         )
 
     fitness = np.array(fitness)
@@ -397,7 +439,6 @@ def run_ga(
         print(f"\n  Gen 0 | Best fitness: {best_fit:.4f} | Attrs: {best_chr.sum()}")
 
     for gen in range(1, max_gen + 1):
-
         gen_start = time.time()
 
         norm_fit = normalize_fitness(fitness)
@@ -459,13 +500,12 @@ def run_ga(
             no_imp += 1
 
         if verbose:
-
             print(
                 f"Gen {gen:2d}/{max_gen}"
                 f" | Melhor={best_fit:.4f}"
                 f" | Atributos={best_chr.sum()}"
                 f" | Sem melhora={no_imp}"
-                f" | Tempo={time.time()-gen_start:.1f}s"
+                f" | Tempo={time.time() - gen_start:.1f}s"
             )
 
         if no_imp >= no_imp_lim:
@@ -548,8 +588,7 @@ def plot_convergence(all_histories, out_dir="."):
     ax.set_xlabel("Geração", fontsize=12)
     ax.set_ylabel("Melhor Fitness", fontsize=12)
     ax.set_title(
-        "Curva de Convergência do Algoritmo Genético\n"
-        f"(Média de {n_exp} experimentos)",
+        f"Curva de Convergência do Algoritmo Genético\n(Média de {n_exp} experimentos)",
         fontsize=13,
     )
     ax.legend()
