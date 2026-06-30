@@ -49,13 +49,13 @@ DEVICE = get_device()
 # ─────────────────────────────────────────────
 PARAMS = {
     # Algoritmo Genético
-    "pop_size": 30,
+    "pop_size": 150,
     "pc": 0.85,  # prob. crossover
     "elitism": 10,  # elitismo: top-10 preservados
     "gap": 2,  # Steady-State gap
-    "max_gen": 5,  # máx. gerações
+    "max_gen": 200,  # máx. gerações
     "no_improve": 20,  # parada antecipada
-    "n_experiments": 3,  # experimentos para curva média
+    "n_experiments": 20,  # experimentos para curva média
     # Rede Neural
     "hidden1": 32,
     "hidden2": 16,
@@ -702,7 +702,6 @@ def main():
     timestamp = datetime.now().strftime("%d-%m-%Y-%H%M%S")
     out_dir = os.path.join("resultados", timestamp)
     os.makedirs(out_dir, exist_ok=True)
-
     t0 = time.time()
 
     # 1. Pré-processamento

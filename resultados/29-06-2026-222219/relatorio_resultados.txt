@@ -1,0 +1,60 @@
+RELATÓRIO - AG + RNA
+==================================================
+
+Melhor experimento  : 5
+Melhor fitness      : 0.9680
+Média fitness       : 0.9650 ± 0.0017
+Atributos totais    : 75
+Atributos selecion. : 24
+Redução             : 68.0%
+
+Cromossomo:
+[1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0]
+
+Atributos selecionados:
+  [0] arquivo_UF
+  [4] IDADE
+  [5] RACACOR
+  [10] OCUP
+  [11] LOCOCOR
+  [14] GESTACAO
+  [16] OBITOPARTO
+  [20] ASSISTMED
+  [21] EXAME
+  [24] CAUSABAS
+  [31] DTCADASTRO
+  [33] STCODIFICA
+  [35] VERSAOSIST
+  [41] DIFDATA
+  [44] TPOBITOCOR
+  [49] res_MUNNOMEX
+  [51] res_FRONTEIRA
+  [53] res_MSAUDCOD
+  [58] ocor_MUNNOMEX
+  [59] ocor_AMAZONIA
+  [61] ocor_CAPITAL
+  [64] ocor_CSAUDCOD
+  [66] ocor_CODIGO_UF
+  [73] ano_nasc
+
+
+Parâmetros utilizados:
+  pop_size: 150
+  pc: 0.85
+  elitism: 10
+  gap: 2
+  max_gen: 200
+  no_improve: 20
+  n_experiments: 20
+  hidden1: 32
+  hidden2: 16
+  lr: 0.001
+  epochs: 10
+  batch_size: 32
+  patience: 10
+  train_ratio: 0.7
+  val_ratio: 0.15
+  test_ratio: 0.15
+  random_seed: 42
+  w_f1: 0.9
+  w_feat: 0.1
